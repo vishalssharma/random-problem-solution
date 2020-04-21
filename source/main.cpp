@@ -1,10 +1,12 @@
 #include<bits/stdc++.h>
+#include<chrono>
 using namespace std;
-struct dict{
-    string str;
+using namespace std::chrono;
+struct dictionary{
+    string word;
     unsigned int freq;
 };
-dict d[5000];
+dictionary dict[5000];
 void insertWords(){
     ifstream fin;
     fin.open("../source/EnglishDictionary.csv",ios::in);
@@ -23,8 +25,8 @@ void insertWords(){
         while(getline(s,word,',')){
             row.push_back(word);
         }
-        d[i].str = row[0];
-        d[i].freq = stoi(row[1]);
+        dict[i].word = row[0];
+        dict[i].freq = stoi(row[1]);
         i++;
 
 
@@ -32,13 +34,13 @@ void insertWords(){
 
 
     for(int j=0;j<=i;j++){
-        cout<<d[j].str<<" "<<d[j].freq;
+        cout<<dict[j].word<<" "<<dict[j].freq;
         cout<<endl;
     }
 
 }
 bool printTopWords(string s){
-    
+    return true;
 
 }
 int main(){
@@ -48,12 +50,17 @@ int main(){
     string s;
     while(c != '#'){
         s += c;
+        auto start = high_resolution_clock::now();
         bool flag = printTopWords(s);
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop-start);
         if(flag == false){
-            cout<<"No match Found !!"<<endl;
+            cout<<"No match Found !!        "<<duration.count()<<" μs"<<endl;
             cout<<"Exiting"<<endl;
+
             return 0;
         }
+        cout<<"        "<<duration.count()<<" μs"<<endl;
         cin>>c;
     }
     cout<<"Exiting";
