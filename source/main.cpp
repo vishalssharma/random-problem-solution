@@ -1,5 +1,6 @@
 #include<bits/stdc++.h>
 #include<chrono>
+#include<conio.h>
 using namespace std;
 using namespace std::chrono;
 int lb = 0;
@@ -114,9 +115,9 @@ bool findTopWords(string str){
     while(lastOccurance != 4998 && (toupper(dict[lastOccurance].word[lastIndex]) == c || tolower(dict[lastOccurance].word[lastIndex]) == c)){
         lastOccurance++;
     }
-    ub = lastOccurance + 1;
+    ub = lastOccurance;
 
-    cout<<lb<<"  "<<ub<<endl;
+    //cout<<lb<<"  "<<ub<<endl;
     if((ub - lb) == 1){
         cout<<dict[lb].word<<'\t';
     }
@@ -152,13 +153,14 @@ int main(){
         if(flag == false){
             cout<<"No match Found !!        "<<duration.count()<<" μs"<<endl;
             cout<<"Exiting"<<endl;
-
+            getch();
             return 0;
         }
         cout<<"        "<<duration.count()<<" μs"<<endl;
         cin>>c;
     }
     cout<<"Exiting";
+    getch();
     return 0;
 }
 
