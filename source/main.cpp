@@ -37,10 +37,26 @@ void insertWords(){
     }
 
 }
+bool printTopWords(string s){
+    
 
+}
 int main(){
     insertWords();
-
+    char c;
+    cin>>c;
+    string s;
+    while(c != '#'){
+        s += c;
+        bool flag = printTopWords(s);
+        if(flag == false){
+            cout<<"No match Found !!"<<endl;
+            cout<<"Exiting"<<endl;
+            return 0;
+        }
+        cin>>c;
+    }
+    cout<<"Exiting";
     return 0;
 }
 
