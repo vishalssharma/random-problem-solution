@@ -6,7 +6,7 @@ int lb = 0;
 int ub = 4999;
 struct dictionary{
     string word;
-    unsigned int freq;
+    int freq;
 };
 dictionary dict[5000];
 void insertWords(){
@@ -44,17 +44,27 @@ void insertWords(){
 void printTopWords(){
     int left = lb;
     int right = ub;
+    // int maximum = INT_MIN;
+    // string str;
+    // for(int i=lb;i<ub;i++){
+    //     if(dict[i].freq > maximum){
+    //         maximum = max(maximum,dict[i].freq);
+    //         str = dict[i].word;
+    //     }
+    // }
+    // cout<<str<<'\t';
     map<int,string> m;
     for(int i=lb;i<ub;i++)
     m[dict[i].freq] = dict[i].word;
 
     map<int,string>::iterator itr;
-    itr = m.begin();
+    itr = m.end();
+    itr--;
     int i =0;
     while(itr !=m.end() && i<5){
         cout<<itr->second<<'\t';
         i++;
-        itr++;
+        itr--;
     }
 }
 
@@ -83,12 +93,18 @@ bool findTopWords(string str){
     if( posMiddle == -1)
         return false;
     int firstOccurance = posMiddle;
-    while(dict[firstOccurance--].word[lastIndex] == c){}
-    lb = firstOccurance+1;
+    while(firstOccurance >= 0 && (toupper(dict[firstOccurance].word[lastIndex]) == c || tolower(dict[firstOccurance].word[lastIndex]) == c)){
+        firstOccurance--;
+    }
+    lb = firstOccurance+1 + 1;
+    
     int lastOccurance = posMiddle;
-    while(dict[lastOccurance++].word[lastIndex] == c){}
-    ub = lastOccurance;
+    while(lastOccurance != 4898 && (toupper(dict[lastOccurance].word[lastIndex]) == c || tolower(dict[lastOccurance].word[lastIndex]) == c)){
+        lastOccurance++;
+    }
+    ub = lastOccurance + 1;
 
+    cout<<lb<<"  "<<ub<<endl;
     if((ub - lb) == 1){
         cout<<dict[lb].word<<'\t';
     }
