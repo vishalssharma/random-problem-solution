@@ -3,7 +3,7 @@
 using namespace std;
 using namespace std::chrono;
 int lb = 0;
-int ub = 4999;
+int ub = 4998;
 struct dictionary{
     string word;
     int freq;
@@ -67,13 +67,25 @@ void printTopWords(){
         itr--;
     }
 }
+// int findFirstOccurance(int left,int right,int lastIndex,char c){
+//     while(right >= left){
+//         int mid = left + (right-left)/2;
 
+//         if(mid == 0 || tolower(dict[mid].word[lastIndex]) == c && dict[mid-1].word[lastIndex] > c)
+//             return mid;
+//         else if( c > tolower(dict[mid].word[lastIndex])){
+
+//         }
+//     }
+// }
 bool findTopWords(string str){
     int lastIndex = str.size() -1;
     char c = str[lastIndex];
     int left = lb;
     int right = ub-1;
     int posMiddle = -1;
+    // new binary search
+    // int firstOccurance = findFirstOccurance(left,right,lastIndex,c);
     // binary search to find all matching words 
     while(left<=right){
         int mid = left + (right-left)/2;
@@ -96,10 +108,10 @@ bool findTopWords(string str){
     while(firstOccurance >= 0 && (toupper(dict[firstOccurance].word[lastIndex]) == c || tolower(dict[firstOccurance].word[lastIndex]) == c)){
         firstOccurance--;
     }
-    lb = firstOccurance+1 + 1;
+    lb = firstOccurance+1;
     
     int lastOccurance = posMiddle;
-    while(lastOccurance != 4898 && (toupper(dict[lastOccurance].word[lastIndex]) == c || tolower(dict[lastOccurance].word[lastIndex]) == c)){
+    while(lastOccurance != 4998 && (toupper(dict[lastOccurance].word[lastIndex]) == c || tolower(dict[lastOccurance].word[lastIndex]) == c)){
         lastOccurance++;
     }
     ub = lastOccurance + 1;
